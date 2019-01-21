@@ -3,6 +3,8 @@
 # Authors: Anne-Juul Welsink and Marrit Leenstra
 # Date: 21-01-2019
 
+from pyproj import Proj, transform
+
 def reproject(location, oldProjCode, newProjCode):
     """Reproject location point
     
@@ -13,5 +15,5 @@ def reproject(location, oldProjCode, newProjCode):
     """
     inProj = Proj(init= 'epsg:'+ oldProjCode) 
     outProj = Proj(init= 'epsg:' + newProjCode) 
-    lat,lng = transform(inProj, outProj, location.longitude, location.latitude)
-    return (lat,lng)
+    x,y = transform(inProj, outProj, location.longitude, location.latitude)
+    return (x,y)
